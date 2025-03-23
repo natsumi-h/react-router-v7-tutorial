@@ -47,9 +47,9 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
 
   // ここでactionの返り値を受け取れる
-  const lastResult = useActionData<typeof action>();
+  const actionResult = useActionData<typeof action>();
   const [form, fields] = useForm({
-    lastResult,
+    lastResult: actionResult,
     constraint: getZodConstraint(schema),
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
@@ -59,35 +59,28 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
     },
   });
 
-  console.log({ ...getFormProps(form) });
+  console.log("formProps", { ...getFormProps(form) });
   console.log("onSubmit", form.onSubmit);
-  console.log("lastResult", lastResult);
-  console.log("fields", { ...getInputProps(fields.first, { type: "text" }) });
+  console.log("actionResult", actionResult);
+  console.log("inputProps", {
+    ...getInputProps(fields.first, { type: "text" }),
+  });
 
   return (
     <>
-      <Form
-        key={contact.id}
-        // id="contact-form"
-        method="post"
-        {...getFormProps(form)}
-      >
+      <Form key={contact.id} method="post" {...getFormProps(form)}>
         <p>
           <span>Name</span>
           <input
             aria-label="First name"
             defaultValue={contact.first}
-            // name="first"
             placeholder="First"
-            // type="text"
             {...getInputProps(fields.first, { type: "text" })}
           />
           <input
             aria-label="Last name"
             defaultValue={contact.last}
-            // name="last"
             placeholder="Last"
-            // type="text"
             {...getInputProps(fields.last, { type: "text" })}
           />
         </p>
@@ -96,9 +89,7 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
           <span>Twitter</span>
           <input
             defaultValue={contact.twitter}
-            // name="twitter"
             placeholder="@jack"
-            // type="text"
             {...getInputProps(fields.twitter, { type: "text" })}
           />
         </label>
@@ -107,9 +98,7 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
           <input
             aria-label="Avatar URL"
             defaultValue={contact.avatar}
-            // name="avatar"
             placeholder="https://example.com/avatar.jpg"
-            // type="text"
             {...getInputProps(fields.avatar, { type: "text" })}
           />
         </label>
@@ -117,7 +106,6 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
           <span>Notes</span>
           <textarea
             defaultValue={contact.notes}
-            // name="notes"
             rows={6}
             {...getTextareaProps(fields.notes)}
           />
