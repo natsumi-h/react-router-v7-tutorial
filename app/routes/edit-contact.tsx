@@ -29,6 +29,20 @@ export async function loader({ params }: Route.LoaderArgs) {
 export async function action({ params, request }: Route.ActionArgs) {
   // Formデータオブジェクトを取得
   const formData = await request.formData();
+  console.log("formData", formData);
+  //   formData FormData {
+  //   [Symbol(state)]: [
+  //     { name: 'first', value: 'Kent C.' },
+  //     { name: 'last', value: 'Dodds' },
+  //     { name: 'twitter', value: '@kentcdodds' },
+  //     {
+  //       name: 'avatar',
+  //       value: 'https://sessionize.com/image/5578-400o400o2-BMT43t5kd2U1XstaNnM6Ax.jpg'
+  //     },
+  //     { name: 'notes', value: 'test' }
+  //   ]
+  // }
+
   // バリデーション（ConformのparseWithZodにformDataとschemaを渡す）
   const submission = parseWithZod(formData, { schema });
 
