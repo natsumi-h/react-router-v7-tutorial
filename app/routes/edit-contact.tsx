@@ -68,7 +68,14 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <Form key={contact.id} method="post" {...getFormProps(form)}>
+      <Form
+        key={contact.id}
+        method="post"
+        {...getFormProps(form)}
+        // id="contact-form"
+        // noValidate
+        // onSubmit={form.onSubmit}
+      >
         <p>
           <span>Name</span>
           <input
@@ -76,12 +83,22 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
             defaultValue={contact.first}
             placeholder="First"
             {...getInputProps(fields.first, { type: "text" })}
+            // form="contact-form"
+            // id="contact-form-first"
+            // name="first"
+            // type="text"
+            // required
           />
           <input
             aria-label="Last name"
             defaultValue={contact.last}
             placeholder="Last"
             {...getInputProps(fields.last, { type: "text" })}
+            // form="contact-form"
+            // id="contact-form-last"
+            // name="last"
+            // type="text"
+            // required
           />
         </p>
 
