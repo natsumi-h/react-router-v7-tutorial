@@ -9,7 +9,7 @@ mkdir -p ./.amplify-hosting/static
 cp -r ./build/server ./.amplify-hosting/compute/default
 
 # フロントエンドのビルド結果をコピー
-cp -r ./build/client ./.amplify-hosting/static/
+cp -r ./build/client/* ./.amplify-hosting/static/
 
 # node_modulesをコピー
 cp -r ./node_modules ./.amplify-hosting/compute/default/node_modules
